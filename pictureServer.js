@@ -28,7 +28,7 @@ var SerialPort = require('serialport'); // serial library
 var Readline = SerialPort.parsers.Readline; // read serial data as lines
 //-- Addition:
 var NodeWebcam = require( "node-webcam" );// load the webcam module
-var filter = require('node-image-filter');
+var ImageFilter = require('node-image-filter');
 var fs = require('fs');
 
 //---------------------- WEBAPP SERVER SETUP ---------------------------------//
@@ -124,10 +124,24 @@ io.on('connect', function(socket) {
     console.log('making a making a picture at'+ imageName); // Second, the name is logged to the console.
 
     //Third, the picture is  taken and saved to the `public/`` folder
-    NodeWebcam.capture('public/'+imageName, opts, function( err, data ) {
+    let imagePath = 'public/' + imageName;
+    NodeWebcam.capture(imagePath, opts, function( err, data ) {
       io.emit('newPicture',(imageName+'.jpg'));
 
-      
+      ImageFilter.render(imagePath, Filter.preset.invert, function (result) {
+        /* result format
+        {
+            data : stream,
+            type : 'jpg',
+            width : 1024,
+            height : 768
+        }
+        */
+        //result.data.pipe(fs.createWriteStream(`result.${result.type}`)); // save local
+        //res.send('save filtered image');
+        console.log("Image Filtered!");
+      });
+
     });
 
   });
