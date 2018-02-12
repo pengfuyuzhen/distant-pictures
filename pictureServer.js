@@ -28,7 +28,8 @@ var SerialPort = require('serialport'); // serial library
 var Readline = SerialPort.parsers.Readline; // read serial data as lines
 //-- Addition:
 var NodeWebcam = require( "node-webcam" );// load the webcam module
-var sepiaFilter = require("image-filter-sepia");
+var filter = require('node-image-filter');
+var fs = require('fs');
 
 //---------------------- WEBAPP SERVER SETUP ---------------------------------//
 // use express to create the simple webapp
@@ -126,10 +127,7 @@ io.on('connect', function(socket) {
     NodeWebcam.capture('public/'+imageName, opts, function( err, data ) {
       io.emit('newPicture',(imageName+'.jpg'));
 
-      sepiaFilter(data, 1).then(function (result) {
-        console.log("Created filtered image!");
-      });
-
+      
     });
 
   });
