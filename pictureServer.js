@@ -70,7 +70,10 @@ var opts = { //These Options define how the webcam is operated.
     // Webcam.CallbackReturnTypes
     callbackReturn: "location",
     //Logging
-    verbose: false
+    verbose: false,
+
+    // Return type with base 64 image
+    callbackReturn: "base64"
 };
 var Webcam = NodeWebcam.create( opts ); //starting up the webcam
 //----------------------------------------------------------------------------//
@@ -122,10 +125,14 @@ io.on('connect', function(socket) {
 
     //Third, the picture is  taken and saved to the `public/`` folder
     NodeWebcam.capture('public/'+imageName, opts, function( err, data ) {
-    io.emit('newPicture',(imageName+'.jpg')); ///Lastly, the new name is send to the client web browser.
-    /// The browser will take this new name and load the picture from the public folder.
-  });
+      io.emit('newPicture',(imageName+'.jpg')); ///Lastly, the new name is send to the client web browser.
+      /// The browser will take this new name and load the picture from the public folder.
 
+      // Apply sepia filter
+      imageSepia(data, 1).then(function (result) {
+        io.emit('newFilteredPicture', result);
+    });
+    });
   });
   // if you get the 'disconnect' message, say the user disconnected
   socket.on('disconnect', function() {
