@@ -70,7 +70,9 @@ var opts = { //These Options define how the webcam is operated.
     // Webcam.CallbackReturnTypes
     callbackReturn: "location",
     //Logging
-    verbose: false
+    verbose: false,
+
+    callbackReturn: "base64"
 };
 var Webcam = NodeWebcam.create( opts ); //starting up the webcam
 //----------------------------------------------------------------------------//
