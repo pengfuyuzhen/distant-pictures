@@ -128,7 +128,7 @@ io.on('connect', function(socket) {
     NodeWebcam.capture(imagePath, opts, function( err, data ) {
       io.emit('newPicture',(imageName+'.jpg'));
 
-      ImageFilter.render(imagePath, Filter.preset.invert, function (result) {
+      ImageFilter.render(imagePath, ImageFilter.preset.invert, function (result) {
         /* result format
         {
             data : stream,
