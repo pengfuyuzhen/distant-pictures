@@ -41,12 +41,11 @@ socket.on('server-msg', function(msg) {
   console.log('msg:', msg);
   switch (msg) {
     case "light":
-      document.body.style.backgroundColor = "white";
       console.log("white")
       break;
     case "dark":
-      document.body.style.backgroundColor = "black";
       console.log("black");
+      takePicture();
       break;
     default:
       //console.log("something else");
