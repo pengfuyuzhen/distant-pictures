@@ -129,9 +129,9 @@ io.on('connect', function(socket) {
       /// The browser will take this new name and load the picture from the public folder.
 
       // Apply sepia filter
-      imageSepia(data, 1).then(function (result) {
-        io.emit('newFilteredPicture', result);
-    });
+      //imageSepia(data, 1).then(function (result) {
+        //io.emit('newFilteredPicture', result);
+    //});
     });
   });
   // if you get the 'disconnect' message, say the user disconnected
