@@ -39,7 +39,7 @@ socket.on('newPicture', function(msg) {
 socket.on('newFilteredPicture', function(msg)) {
   //source = imageFilterCore.convertImageDataToCanvasURL(msg);
   //document.getElementById('filteredPictureContainer').src=source;
-}
+});
 // read the data from the message that the server sent and change the
 // background of the webpage based on the data in the message
 socket.on('server-msg', function(msg) {
