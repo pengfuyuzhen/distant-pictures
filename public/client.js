@@ -47,7 +47,7 @@ socket.on('server-msg', function(msg) {
   console.log('msg:', msg);
   switch (msg) {
     case "light":
-      console.log("Button touched down")
+      console.log("Button touched down");
       break;
     case "dark":
       console.log("Button touched up");
