@@ -51,7 +51,7 @@ socket.on('server-msg', function(msg) {
       break;
     case "dark":
       console.log("Button touched up");
-      takePicture()
+      takePicture();
       break;
     default:
 
