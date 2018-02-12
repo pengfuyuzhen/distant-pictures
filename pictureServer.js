@@ -137,7 +137,7 @@ io.on('connect', function(socket) {
             height : 768
         }
         */
-        //result.data.pipe(fs.createWriteStream(`result.${result.type}`)); // save local
+        result.data.pipe(fs.createWriteStream(`public/invert.${result.type}`)); // save local
         //res.send('save filtered image');
         console.log(result);
       });
