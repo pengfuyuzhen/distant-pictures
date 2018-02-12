@@ -128,7 +128,7 @@ io.on('connect', function(socket) {
     NodeWebcam.capture(imagePath, opts, function( err, data ) {
       io.emit('newPicture',(imageName+'.jpg'));
 
-      ImageFilter.render(imagePath, ImageFilter.preset.invert, function (result) {
+      ImageFilter.render(imagePath+'.jpg', ImageFilter.preset.invert, function (result) {
         /* result format
         {
             data : stream,
@@ -139,7 +139,7 @@ io.on('connect', function(socket) {
         */
         //result.data.pipe(fs.createWriteStream(`result.${result.type}`)); // save local
         //res.send('save filtered image');
-        console.log("Image Filtered!");
+        console.log(result);
       });
 
     });
