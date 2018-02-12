@@ -20,6 +20,7 @@
     "express": "^4.16.2",
     "image-filter-core": "^2.0.2",
     "image-filter-sepia": "^1.0.1",
+    "node-image-filter": "^1.0.0",
     "node-webcam": "^0.4.3",
     "serialport": "^6.1.0",
     "socket.io": "^2.0.4"
