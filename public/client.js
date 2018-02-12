@@ -41,15 +41,14 @@ socket.on('server-msg', function(msg) {
   console.log('msg:', msg);
   switch (msg) {
     case "light":
-      document.body.style.backgroundColor = "white";
-      console.log("white")
+      console.log("Button touched down")
       break;
     case "dark":
-      document.body.style.backgroundColor = "black";
-      console.log("black");
+      console.log("Button touched up");
+      takePicture()
       break;
     default:
-      //console.log("something else");
+    
       break;
   }
 });
