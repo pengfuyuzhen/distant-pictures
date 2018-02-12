@@ -28,6 +28,7 @@ var SerialPort = require('serialport'); // serial library
 var Readline = SerialPort.parsers.Readline; // read serial data as lines
 //-- Addition:
 var NodeWebcam = require( "node-webcam" );// load the webcam module
+var sepiaFilter = require("image-filter-sepia");
 
 //---------------------- WEBAPP SERVER SETUP ---------------------------------//
 // use express to create the simple webapp
@@ -121,11 +122,17 @@ io.on('connect', function(socket) {
 
     //Third, the picture is  taken and saved to the `public/`` folder
     NodeWebcam.capture('public/'+imageName, opts, function( err, data ) {
-    io.emit('newPicture',(imageName+'.jpg')); ///Lastly, the new name is send to the client web browser.
-    /// The browser will take this new name and load the picture from the public folder.
-  });
+      io.emit('newPicture',(imageName+'.jpg'));
+
+      sepiaFilter(data, 1).then(function (result) {
+        console.log("Created filtered image!");
+      });
+
+    });
 
   });
+
+
   // if you get the 'disconnect' message, say the user disconnected
   socket.on('disconnect', function() {
     console.log('user disconnected');
