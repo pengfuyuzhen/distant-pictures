@@ -128,16 +128,8 @@ io.on('connect', function(socket) {
     NodeWebcam.capture(imagePath, opts, function( err, data ) {
       io.emit('newPicture',(imageName+'.jpg'));
 
-      ImageFilter.render(imagePath+'.jpg', ImageFilter.preset.invert, function (result) {
-        /* result format
-        {
-            data : stream,
-            type : 'jpg',
-            width : 1024,
-            height : 768
-        }
-        */
-        var filteredImageName = imageName + 'invert' + `${result.type}`;
+      ImageFilter.render(imagePath+'.jpg', ImageFilter.preset.sepia, function (result) {
+        var filteredImageName = imageName + '-filter' + `${result.type}`;
         result.data.pipe(fs.createWriteStream(`public/${filteredImageName}`)); // save local
         io.emit('newFilteredPicture', filteredImageName);
       });
