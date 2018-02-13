@@ -128,7 +128,7 @@ io.on('connect', function(socket) {
     NodeWebcam.capture(imagePath, opts, function( err, data ) {
       io.emit('newPicture',(imageName+'.jpg'));
 
-      ImageFilter.render(imagePath+'.jpg', ImageFilter.preset.sepia, function (result) {
+      ImageFilter.render(imagePath+'.jpg', ImageFilter.preset.grayscale, function (result) {
         var filteredImageName = imageName + '-filter' + `${result.type}`;
         result.data.pipe(fs.createWriteStream(`public/${filteredImageName}`)); // save local
         io.emit('newFilteredPicture', filteredImageName);
